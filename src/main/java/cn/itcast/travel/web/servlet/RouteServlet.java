@@ -134,6 +134,5 @@ public class RouteServlet extends BaseServlet {
             route = service.findOne(String.valueOf(rid));
             writeValue(route, response);
         }
-
     }
 }

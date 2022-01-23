@@ -26,6 +26,7 @@ public interface FavoriteService {
 
     /**
      * 展示用户收藏路线
+     *
      * @param uid
      * @return
      */

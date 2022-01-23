@@ -37,6 +37,7 @@ public interface FavoriteDao {
 
     /**
      * 展示用户收藏
+     *
      * @param uid
      * @return
      */
