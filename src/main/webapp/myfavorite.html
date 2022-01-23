@@ -32,7 +32,7 @@
         $(function () {
             $.get("route/showFavorite", {}, function (route) {
                 let divstr = '<div class="col-md-3">\n' +
-                    '           <a href="route_detail.html">\n' +
+                    '           <a href="route_detail.html?rid=' + route.rid + '">\n' +
                     '               <img src="' + route.routeImgList[0].bigPic + '" alt="">\n' +
                     '               <div class="has_border">\n' +
                     '                   <h3>' + route.rname + '</h3>\n' +
