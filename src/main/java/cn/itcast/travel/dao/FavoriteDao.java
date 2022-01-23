@@ -1,6 +1,7 @@
 package cn.itcast.travel.dao;
 
 import cn.itcast.travel.domain.Favorite;
+import cn.itcast.travel.domain.Route;
 
 import java.util.List;
 
@@ -42,4 +43,22 @@ public interface FavoriteDao {
      * @return
      */
     List show(int uid);
+
+    /**
+     * 根据用户id查找收藏数量
+     *
+     * @param uid
+     * @return
+     */
+    int findCountByUid(int uid);
+
+    /**
+     * 分页查询收藏
+     *
+     * @param uid
+     * @param start
+     * @param pageSize
+     * @return
+     */
+    List<Route> findByUidAndPage(int uid, int start, int pageSize);
 }

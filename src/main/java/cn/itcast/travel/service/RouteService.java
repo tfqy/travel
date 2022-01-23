@@ -19,5 +19,22 @@ public interface RouteService {
      */
     PageBean<Route> pageQuery(int cid, int currentPage, int pageSize, String rname);
 
+    /**
+     * 查找路线
+     *
+     * @param rid
+     * @return
+     */
     Route findOne(String rid);
+
+    /**
+     * 查找用户收藏路线
+     *
+     * @param uid
+     * @param currentPage
+     *
+     * @param pageSize
+     * @return
+     */
+    PageBean<Route> favoritePageQuery(int uid, int currentPage, int pageSize);
 }

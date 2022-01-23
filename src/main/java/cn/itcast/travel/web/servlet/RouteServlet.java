@@ -99,6 +99,14 @@ public class RouteServlet extends BaseServlet {
         writeValue(flag, response);
     }
 
+    /**
+     * 添加收藏
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     public void addFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //获取路线id
         String rid = request.getParameter("rid");
@@ -117,25 +125,46 @@ public class RouteServlet extends BaseServlet {
         favoriteService.add(rid, uid);
     }
 
+    /**
+     * 展示收藏
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     public void showFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //获取登录用户
+        // 获取session，取得用户对象
         User user = (User) request.getSession().getAttribute("user");
-        //用户id
-        int uid;
+        // 用户未登录
         if (user == null) {
-            //用户未登录
+            writeValue(null, response);
             return;
+        }
+        // 获取并处理浏览器请求属性
+        // 当前页数
+        String currentPageStr = request.getParameter("currentPage");
+        // 每页显示条数
+        String pageSizeStr = request.getParameter("pageSize");
+        int currentPage = 0;
+        if ("".equals(currentPageStr)) {
+            currentPage = 1;
         } else {
-            //用户已经登录
-            uid = user.getUid();
+            currentPage = Integer.parseInt(currentPageStr);
         }
-        List list = favoriteService.show(uid);
-        List<Route> routeList = new ArrayList<>();
-        Route route = null;
-        for (Object rid : list) {
-            route = service.findOne(String.valueOf(rid));
-            routeList.add(route);
+
+        int pageSize = 0;
+        if (pageSizeStr == null) {
+            pageSize = 8;
+        } else {
+            pageSize = Integer.parseInt(pageSizeStr);
         }
-        writeValue(routeList, response);
+
+        System.out.println(currentPage);
+        System.out.println(pageSize);
+        // 2.获取service，根据uid查rid，再根据rid查详情数据
+        PageBean<Route> routePageBean = service.favoritePageQuery(user.getUid(), currentPage, pageSize);
+        // 3.将数据回写至浏览器
+        writeValue(routePageBean, response);
     }
 }

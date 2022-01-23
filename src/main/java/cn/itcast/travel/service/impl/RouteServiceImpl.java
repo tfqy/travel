@@ -14,6 +14,7 @@ import cn.itcast.travel.domain.RouteImg;
 import cn.itcast.travel.domain.Seller;
 import cn.itcast.travel.service.RouteService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,6 +44,40 @@ public class RouteServiceImpl implements RouteService {
         int totalPage = (totalCount % pageSize) == 0 ? (totalCount / pageSize) : (totalCount / pageSize) + 1;
         pb.setTotalPage(totalPage);
         return pb;
+    }
+
+    @Override
+    public PageBean<Route> favoritePageQuery(int uid, int currentPage, int pageSize) {
+        // 创建PageBean<Route>对象
+        PageBean<Route> routePageBean = new PageBean<>();
+        // 查询总记录数totalCount
+        int totalCount = favoriteDao.findCountByUid(uid);
+        // 没有查到收藏记录
+        if (totalCount == 0) {
+            return routePageBean;
+        }
+        // 计算起始记录数start，计算总页数totalPage
+        int start = (currentPage - 1) * pageSize;
+        int totalPage = (totalCount % pageSize == 0) ? (totalCount / pageSize) : (totalCount / pageSize + 1);
+        // 分页查询rid列表（封装在MyFavorite类中）
+        List<Route> pageFavoriteList = favoriteDao.findByUidAndPage(uid, start, pageSize);
+        // 创新一个空的List<Route>集合
+        List<Route> routeList = new ArrayList<>();
+        // 遍历pageFavoriteList组装routeList
+        for (Route favoriteRoute : pageFavoriteList) {
+            // 根据其rid属性利用routeDao查route对象
+            Route route = routeDao.findOne(favoriteRoute.getRid());
+            // 向routeList中追加route属性
+            routeList.add(route);
+        }
+
+        // 并组装PageBean<Route>对象
+        routePageBean.setCurrentPage(currentPage);     // 设置当前页码
+        routePageBean.setPageSize(pageSize);           // 设置每页显示条数
+        routePageBean.setTotalPage(totalPage);         // 设置总页数
+        routePageBean.setTotalCount(totalCount);       // 查询并设置总记录数
+        routePageBean.setList(routeList);
+        return routePageBean;
     }
 
     @Override
