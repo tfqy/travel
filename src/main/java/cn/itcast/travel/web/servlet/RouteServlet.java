@@ -14,6 +14,7 @@ import javax.servlet.annotation.*;
 import java.awt.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -129,10 +130,12 @@ public class RouteServlet extends BaseServlet {
             uid = user.getUid();
         }
         List list = favoriteService.show(uid);
+        List<Route> routeList = new ArrayList<>();
         Route route = null;
         for (Object rid : list) {
             route = service.findOne(String.valueOf(rid));
-            writeValue(route, response);
+            routeList.add(route);
         }
+        writeValue(routeList, response);
     }
 }

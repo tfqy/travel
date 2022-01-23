@@ -30,18 +30,21 @@
        </div>
    */
         $(function () {
-            $.get("route/showFavorite", {}, function (route) {
-                let divstr = '<div class="col-md-3">\n' +
-                    '           <a href="route_detail.html?rid=' + route.rid + '">\n' +
-                    '               <img src="' + route.routeImgList[0].bigPic + '" alt="">\n' +
-                    '               <div class="has_border">\n' +
-                    '                   <h3>' + route.rname + '</h3>\n' +
-                    '                   <div class="price">网付价<em>￥</em><strong>' + route.price + '</strong><em>起</em></div>\n' +
-                    '               </div>\n' +
-                    '           </a>\n' +
-                    '       </div>'
-
-                $(".row").html(divstr);
+            $.get("route/showFavorite", {}, function (routeList) {
+                let divstrs;
+                for (let i = 0; i < routeList.length; i++) {
+                    let divstr = '<div class="col-md-3">\n' +
+                        '           <a href="route_detail.html?rid=' + routeList[i].rid + '">\n' +
+                        '               <img src="' + routeList[i].routeImgList[0].bigPic + '" alt="">\n' +
+                        '               <div class="has_border">\n' +
+                        '                   <h3>' + routeList[i].rname + '</h3>\n' +
+                        '                   <div class="price">网付价<em>￥</em><strong>' + routeList[i].price + '</strong><em>起</em></div>\n' +
+                        '               </div>\n' +
+                        '           </a>\n' +
+                        '       </div>'
+                    divstrs += divstr;
+                }
+                $(".row").html(divstrs);
             });
         });
 
