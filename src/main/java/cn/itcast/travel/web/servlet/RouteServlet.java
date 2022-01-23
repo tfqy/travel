@@ -160,8 +160,6 @@ public class RouteServlet extends BaseServlet {
             pageSize = Integer.parseInt(pageSizeStr);
         }
 
-        System.out.println(currentPage);
-        System.out.println(pageSize);
         // 2.获取service，根据uid查rid，再根据rid查详情数据
         PageBean<Route> routePageBean = service.favoritePageQuery(user.getUid(), currentPage, pageSize);
         // 3.将数据回写至浏览器
