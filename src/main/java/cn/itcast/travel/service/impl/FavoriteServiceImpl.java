@@ -27,8 +27,8 @@ public class FavoriteServiceImpl implements FavoriteService {
         favoriteDao.add(Integer.parseInt(rid), uid);
     }
 
-    @Override
-    public List show(int uid) {
-        return favoriteDao.show(uid);
-    }
+//    @Override
+//    public List show(int uid) {
+//        return favoriteDao.show(uid);
+//    }
 }

@@ -59,11 +59,11 @@ public class RouteServiceImpl implements RouteService {
         // 计算起始记录数start，计算总页数totalPage
         int start = (currentPage - 1) * pageSize;
         int totalPage = (totalCount % pageSize == 0) ? (totalCount / pageSize) : (totalCount / pageSize + 1);
-        // 分页查询rid列表（封装在MyFavorite类中）
+        // 分页查询rid列表（封装在Route类中）
         List<Route> pageFavoriteList = favoriteDao.findByUidAndPage(uid, start, pageSize);
         // 创新一个空的List<Route>集合
         List<Route> routeList = new ArrayList<>();
-        // 遍历pageFavoriteList组装routeList
+        // 遍历pageFavoriteList组装favoriteRoute
         for (Route favoriteRoute : pageFavoriteList) {
             // 根据其rid属性利用routeDao查route对象
             Route route = routeDao.findOne(favoriteRoute.getRid());

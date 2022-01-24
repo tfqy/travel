@@ -7,9 +7,10 @@
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
     <style>
-        .tab-content .row>div {
+        .tab-content .row > div {
             margin-top: 16px;
         }
+
         .tab-content {
             margin-bottom: 36px;
         }
@@ -36,12 +37,10 @@
                 // 解析pageBean数据，展示到页面上
 
                 if (pageBean == null) {
-                    // 可以添加一些渲染，由于我主学后端，这里就不展开了
                     $("#favorite_routes").html('<span id="notlogin">您尚未登录，请<a href="login.html"> 【【登录】 </a></span>');
                 }
 
                 if (pageBean["totalCount"] === 0) {
-                    // 可以添加一些渲染，由于我主学后端，这里就不展开了
                     $("#favorite_routes").html('<span id="nofavorite">您还没有任何收藏哦，去看一看线路列表吧</span>');
                 }
 
@@ -49,10 +48,10 @@
                 // 当页面加载完成后，调用load方法发送AJAX请求加载数据
                 let pageLis = "";
                 // let href = '"localhost/travel/route_list.html?cid="''';
-                let firstPage = '<li onclick="load('+ 1 + ')"><a href="myfavorite.html">首页</a></li>';
-                let previousPageNum = pageBean.currentPage-1 < 1 ? 1 : pageBean.currentPage-1;      // 计算上一页页码
-                let previousPage = '<li onclick="load('+ previousPageNum +')" class="threeword">' +
-                    '<a href="myfavorite.html?currentPage='+ previousPageNum +'">上一页</a></li>';
+                let firstPage = '<li onclick="load(' + 1 + ')"><a href="myfavorite.html">首页</a></li>';
+                let previousPageNum = pageBean.currentPage - 1 < 1 ? 1 : pageBean.currentPage - 1;      // 计算上一页页码
+                let previousPage = '<li onclick="load(' + previousPageNum + ')" class="threeword">' +
+                    '<a href="myfavorite.html?currentPage=' + previousPageNum + '">上一页</a></li>';
                 pageLis += firstPage + previousPage;
                 // 1.2 展示分页页码
                 /* 显示部分页面
@@ -85,20 +84,20 @@
                     let li;
                     if (pageBean["currentPage"] === i) {
                         // 对当前页码添加特殊的CSS样式
-                        li = '<li class="curPage" onclick="load('+ i +')">' +
-                            '<a href="myfavorite.html?currentPage='+ i +'">'+ i +'</a></li>';
+                        li = '<li class="curPage" onclick="load(' + i + ')">' +
+                            '<a href="myfavorite.html?currentPage=' + i + '">' + i + '</a></li>';
                     } else {
-                        li = '<li onclick="load('+ i +'">' +
-                            '<a href="myfavorite.html?currentPage='+ i +'">'+ i +'</a></li>';
+                        li = '<li onclick="load(' + i + '">' +
+                            '<a href="myfavorite.html?currentPage=' + i + '">' + i + '</a></li>';
                     }
                     pageLis += li;
                 }
 
-                let nextPageNum = pageBean.currentPage+1 > pageBean["totalPage"] ? pageBean["totalPage"] : pageBean.currentPage+1;      // 计算下一页页码
-                let nextPage = '<li onclick="load('+ nextPageNum +')" class="threeword">' +
-                    '<a href="myfavorite.html?currentPage='+ nextPageNum +'">下一页</a></li>';
-                let lastPage = '<li onclick="load('+ pageBean["totalPage"] +')" class="threeword">' +
-                    '<a href="myfavorite.html?currentPage='+ pageBean.totalPage +'">末页</a></li>';
+                let nextPageNum = pageBean.currentPage + 1 > pageBean["totalPage"] ? pageBean["totalPage"] : pageBean.currentPage + 1;      // 计算下一页页码
+                let nextPage = '<li onclick="load(' + nextPageNum + ')" class="threeword">' +
+                    '<a href="myfavorite.html?currentPage=' + nextPageNum + '">下一页</a></li>';
+                let lastPage = '<li onclick="load(' + pageBean["totalPage"] + ')" class="threeword">' +
+                    '<a href="myfavorite.html?currentPage=' + pageBean.totalPage + '">末页</a></li>';
                 pageLis += nextPage + lastPage;
 
                 // 将lis内容设置到ul中
@@ -119,14 +118,14 @@
                     </div>
                 */
 
-                for(let i = 0; i < pageBean.list.length; i ++) {
+                for (let i = 0; i < pageBean.list.length; i++) {
                     let route = pageBean.list[i];
                     let div = '<div class="col-md-3">\n' +
-                        '                            <a href="route_detail.html?rid='+ route.rid +'">\n' +
-                        '                                <img src="'+ route.rimage +'" alt="">\n' +
+                        '                            <a href="route_detail.html?rid=' + route.rid + '">\n' +
+                        '                                <img src="' + route.rimage + '" alt="">\n' +
                         '                                <div class="has_border">\n' +
-                        '                                    <h3>'+ route.rname +'</h3>\n' +
-                        '                                    <div class="price">网付价<em>￥</em><strong>'+ route.price +'</strong><em>起</em></div>\n' +
+                        '                                    <h3>' + route.rname + '</h3>\n' +
+                        '                                    <div class="price">网付价<em>￥</em><strong>' + route.price + '</strong><em>起</em></div>\n' +
                         '                                </div>\n' +
                         '                            </a>\n' +
                         '                        </div>';

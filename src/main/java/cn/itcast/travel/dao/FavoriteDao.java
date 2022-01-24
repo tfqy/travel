@@ -42,7 +42,7 @@ public interface FavoriteDao {
      * @param uid
      * @return
      */
-    List show(int uid);
+//    List show(int uid);
 
     /**
      * 根据用户id查找收藏数量

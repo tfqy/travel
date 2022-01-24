@@ -30,5 +30,5 @@ public interface FavoriteService {
      * @param uid
      * @return
      */
-    List show(int uid);
+//    List show(int uid);
 }

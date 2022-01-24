@@ -44,13 +44,13 @@ public class FavoriteDaoImpl implements FavoriteDao {
         template.update(sql, rid, new Date(), uid);
     }
 
-    @Override
-    public List show(int uid) {
-        List list = null;
-        String sql = "select rid from tab_favorite where uid = ?";
-        list = template.queryForList(sql, Integer.class, uid);
-        return list;
-    }
+//    @Override
+//    public List show(int uid) {
+//        List list = null;
+//        String sql = "select rid from tab_favorite where uid = ?";
+//        list = template.queryForList(sql, Integer.class, uid);
+//        return list;
+//    }
 
     @Override
     public int findCountByUid(int uid) {
