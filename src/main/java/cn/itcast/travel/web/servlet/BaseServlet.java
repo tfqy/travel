@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,6 +65,20 @@ public class BaseServlet extends HttpServlet {
     public String writeValueAsString(Object obj) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(obj);
+    }
+
+    /**
+     * 重载方法，向客户端浏览器回传Cookie
+     *
+     * @param cookie   Cookie对象
+     * @param maxAge   Cookie生命周期
+     * @param path     Cookie作用域
+     * @param response Http响应对象
+     */
+    public void writeCookie(Cookie cookie, int maxAge, String path, HttpServletResponse response) {
+        cookie.setMaxAge(maxAge);
+        cookie.setPath(path);
+        response.addCookie(cookie);
     }
 
 }
